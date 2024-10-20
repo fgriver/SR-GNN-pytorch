@@ -53,34 +53,6 @@ class MyDataset(Dataset):
         target = self.targets[index] - 1
 
         return one_input, mask, target
-        # node = np.unique(one_input)
-        #
-        # item = node.tolist() + (self.max_n_node - len(node)) * [0]
-        # alias_input = [np.where(node == i)[0][0] for i in one_input]
-        #
-        # u_A = np.zeros((self.max_n_node, self.max_n_node))
-        # for i in np.arange(len(one_input) - 1):
-        #     if one_input[i] == 0:
-        #         break
-        #     u = np.where(node == one_input[i])[0][0]
-        #     v = np.where(node == one_input[i + 1])[0][0]
-        #     u_A[u][v] = 1
-        #
-        # # 求入度: 行相加
-        # u_sum_in = np.sum(u_A, 0)
-        # # 方便下列归一化时除数不为0
-        # u_sum_in[np.where(u_sum_in == 0)] = 1
-        # u_A_in = np.divide(u_A, u_sum_in)
-        #
-        # # 同理求出度
-        # u_sum_out = np.sum(u_A, 1)
-        # u_sum_out[np.where(u_sum_out == 0)] = 1
-        # u_A_out = np.divide(u_A.transpose(), u_sum_out)
-        #
-        # # 拼接出入度矩阵 完善u_A 然后将其添加到A中/ 使用transpose进行转置使得 u_A 的行作为出入度信息而不是列 即.sum(u_A, 1)
-        # u_A = np.concatenate([u_A_in, u_A_out]).transpose()
-        #
-        # return item, mask, target, u_A, alias_input
 
 
 def collate_fn(batch):
